@@ -1,0 +1,3 @@
+C:\Users\Admin\source\repos\WebApplication1\PizzaAppClient\obj\Debug\PizzaAppClient.njsprojAssemblyReference.cache
+C:\Users\Admin\source\repos\WebApplication1\PizzaAppClient\obj\Debug\PizzaAppClient.njsproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\WebApplication1\PizzaAppClient\bin\Microsoft.NodejsTools.WebRole.dll
