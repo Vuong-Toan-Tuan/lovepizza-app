@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,27 +24,43 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public async Task<ActionResult<List<PizzaVote>>> Get()
         {
-            //return new string[] { "value1", "value2" };
+            
             return await _dbContext.PizzaVotes.ToListAsync();
         }
 
-        // GET api/<PizzaVoteController>/5
+        // GET api/<PizzaVoteController>/{email}
+        [Authorize]
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<PizzaVote>> Get(string id)
         {
-            return "value";
+            return await _dbContext.PizzaVotes.FindAsync(id);
         }
 
         // POST api/<PizzaVoteController>
+        [Authorize]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(PizzaVote model)
         {
+            await _dbContext.AddAsync(model);
+            await _dbContext.SaveChangesAsync();
         }
 
         // PUT api/<PizzaVoteController>/5
+        [Authorize]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Put(string id, PizzaVote model)
         {
+            var exists = await _dbContext.PizzaVotes.AnyAsync(f => f.Id == id);
+            if (!exists)
+            {
+                return NotFound();
+            }
+
+            _dbContext.PizzaVotes.Update(model);
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
         }
 
         // DELETE api/<PizzaVoteController>/5

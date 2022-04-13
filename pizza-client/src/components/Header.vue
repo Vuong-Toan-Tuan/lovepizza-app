@@ -1,13 +1,10 @@
 <template>
-  <div>
-      <h1>Header Pizza App</h1>
-  </div>
+  <h1 class="h1">Love Pizza, Vote for Pizza</h1>
 </template>
 
 <script>
 export default {
-    name: 'Header'
-    
+  name: 'Header'
 }
 </script>
 
